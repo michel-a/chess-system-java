@@ -18,7 +18,8 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 		List<ChessPiece> captured = new ArrayList<>();
 		
-		while(true) {
+		// while(true) { alterado na aula 162, para enquanto a minha partida não estiver em check mate, conforme while abaixo
+		while(!chessMatch.getCheckMate()) {
 			try {
 				UI.clearScreen();
 				// UI.printBoard(chessMatch.getPieces()); alterada essa linha pela de baixo na aula 158
@@ -49,6 +50,9 @@ public class Program {
 				sc.nextLine();
 			}
 		}
+		
+		UI.clearScreen();
+		UI.printMatch(chessMatch, captured);
 	}
 
 }
