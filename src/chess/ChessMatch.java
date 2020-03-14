@@ -89,9 +89,11 @@ public class ChessMatch {
 	}
 	
 	private Piece makeMove(Position source, Position target) {
-		Piece p = board.removePiece(source);
+		// Piece p = board.removePiece(source); Aula 163 foi feito um downcasting de Piece para ChessPiece, conforme linha abaixo
+		ChessPiece p = (ChessPiece) board.removePiece(source);
+		p.increaseMoveCount();
 		Piece capturedPiece = board.removePiece(target);
-		board.placePiece(p, target);
+		board.placePiece(p, target); // Aula 163, aqui é feito um upcasting automático
 		
 		if (capturedPiece != null) {
 			piecesOnTheBoard.remove(capturedPiece);
@@ -102,7 +104,9 @@ public class ChessMatch {
 	}
 	
 	private void undoMove(Position source, Position target, Piece capturedPiece) {
-		Piece p = board.removePiece(target);
+		// Piece p = board.removePiece(target); Aula 163 foi feito um downcasting de Piece para ChessPiece, conforme linha abaixo
+		ChessPiece p = (ChessPiece) board.removePiece(target);
+		p.decreaseMoveCount();
 		board.placePiece(p, source);
 		
 		if (capturedPiece != null) {
